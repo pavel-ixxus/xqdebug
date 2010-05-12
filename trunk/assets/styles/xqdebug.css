@@ -1,0 +1,228 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, Helvetica;
+    font-size: 10pt;
+    margin-left: 1em;
+    margin-top: 1em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+.super {
+	position: relative;
+	bottom: 0.5em;
+	font-size: 0.7em;
+}
+
+#content {
+	border: 1px solid black;
+	clear: both;
+	padding: 0 1em;
+	background: grey;
+}
+table { 
+	empty-cells:show; 
+  text-align: left;
+}
+td a {
+  text-decoration:none;
+}
+td a:hover {
+  background-color: #ccccff;
+}
+caption {
+  text-align: left;
+}
+th {
+  text-align: center;
+}
+tr {
+  width:100%;
+}
+tr.rowHdr {
+  background-color: #aaddff;
+}
+tr.odd {
+  background-color: #eeeeff;
+}
+tr.currentExpr {
+  background-color:yellow;
+}
+td.breakpoint {
+  background-color:red;
+}
+td th {
+  border-left: 1px solid black;
+  border-style: none solid;
+  border-width: 0 1px;
+}
+td.src {
+  text-align: left;
+	white-space: pre; /* css-3 */
+}
+li {
+    font-size: 10pt;
+}
+h1, h2, h3, h4 {
+    font-family: "Arial Narrow", "Helvetica";
+    background-color: #aaddff;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+h1 {
+    font-size: 16pt;
+}
+h2 {
+    font-size: 14pt;
+}
+h3 {
+    font-size: 12pt;
+    font-style: italic;
+    vertical-align: middle;
+}
+h4 {
+    font-size: 10pt;
+    vertical-align: middle;
+    margin-bottom: 1px;
+}
+fieldset {
+    margin: 2px 2px 2px 2px;
+}
+textarea {
+    font-family: Arial, Helvetica;
+    font-size: 10pt;
+}
+div.tableContainer, pre, textarea {
+	overflow: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+div.tableContainer table {
+  width: 100%;
+  float: left;
+}
+div.wrapper {
+  border: 1px solid black; 
+  border-collapse: collapse;
+}
+div.wrapper, h2, h3, h4, pre, div {
+  width: 100%;
+  padding: 0px 0px; 
+  margin: 0px 0px;
+  border-collapse: collapse;
+}
+ul.disc {list-style-type: disc; list-style-position:inside}
+ul.circle {list-style-type: circle; list-style-position:inside}
+ul.square {list-style-type: square; list-style-position:inside}
+ul.none {list-style-type: none; list-style-position:inside}
+li.disc {list-style-type: disc; list-style-position:inside}
+li.circle {list-style-type: circle; list-style-position:inside}
+li.square {list-style-type: square; list-style-position:inside}
+li.none {list-style-type: none; list-style-position:inside}
+.list {
+    margin-left: 1em;
+    margin-bottom: 1em;
+}
+.title {
+    font-family: "Arial Narrow", Helvetica;
+    font-size: 16pt;
+    font-weight: bold;
+    background-color: #aaddff;
+}
+.note {
+    font-size: 10pt;
+    font-weight: bold;
+}
+.banner {
+    font-family: Georgia;
+    font-size: 14pt;
+    border: 0px;
+}
+.stack_expr tr th {
+  text-align: left;
+}
+.statusrowtitle {
+    background-color: #aaddff;
+    font-size: 10pt;
+}
+.statusevenrow {
+    background-color: #eeeeee;
+}
+a.collapse,a.expand {
+    padding-left: 2px;
+    padding-right: 4px;
+    text-decoration: none;
+    color:black;
+    cursor:pointer;
+}
+input.hidden {
+    display: none;
+}
+div#req-table {
+  height:70px;
+  width:100%;
+}
+div#dbg_stack {
+  height:12em;
+  width:100%;
+}
+div#dbg_src {
+  height:40em;
+  width:100%;
+}
+div#dbg_bp {
+   width:100%; 
+   height:100px;
+}
+#xqdebug-header ul {
+	float: left;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#xqdebug-header li {
+	float: left;
+	border: 1px solid #bbb;
+	border-bottom-width: 0;
+	-moz-border-radius-topleft: 10px;
+	-webkit-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	-webkit-border-radius-topright: 10px;
+	margin: 0;
+}
+#xqdebug-header a {
+	text-decoration: none;
+	display: block;
+	-moz-border-radius-topleft: 10px;
+	-webkit-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	-webkit-border-radius-topright: 10px;
+	background: -moz-linear-gradient(left 90deg, rgb(20, 20, 20), rgb(200, 200, 200));
+	padding: 0.75em 1em;
+	color: #fff;
+	width: 8em;
+	text-align: center;
+	font-weight: bold;
+}
+#xqdebug-header a:hover {
+	background: #333;
+}
+#xqdebug-header #selected {
+	border-color: white;
+}
+#xqdebug-header #selected a {
+	position: relative;
+	top: 1px;
+	background: black;
+	color: white;
+	font-weight: bold;
+}
+#xqdebug-header h1 {
+	float: left;
+	margin: 0;
+	padding: 0 1em 0 1em;
+}
+

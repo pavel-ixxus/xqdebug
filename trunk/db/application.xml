@@ -1,0 +1,51 @@
+<application appName="xqdebug" appDesc="XQuery Debugger" appDetails="XQuery Application Debugger">
+	<roles>
+		<role name="!_xqdebug-role" desc="XQDebug Role" roles="*admin"/>
+	</roles>
+
+	<users>
+		<user name="!xqdebug" desc="XQDebug User" password="debug" roles="!_xqdebug-role"/>
+	</users>
+
+	<dbs>
+		<db dbName="!XQDebug">
+			<collectionLexicon>true</collectionLexicon>
+			<uriLexicon>true</uriLexicon>
+			<wordLexicon collation="http://marklogic.com/collation/codepoint" />
+
+			<dir name="/" clean="true">
+
+				<server name="!_xqdebug-webdav" env="LOCAL" type="webdav" port="9801">
+					<authentication>digest</authentication>
+					<computeContentLength>true</computeContentLength>
+					<debugAllow>false</debugAllow>
+					<profileAllow>false</profileAllow>
+				</server>
+
+				<dir name="content/xqdebug/" clearPermissions="true">
+					<uriPrivilege roles="!_xqdebug-role"/>
+					<permissions roles="!_xqdebug-role" access="riu"/>
+				</dir>
+
+				<dir name="code/xqdebug/" clearPermissions="true">
+					<uriPrivilege roles="!_xqdebug-role"/>
+					<permissions roles="!_xqdebug-role" access="riux"/>
+
+					<load root="/"/>
+
+					<server name="!_xqdebug-http" type="http" port="9800" db="*XQDebug">
+						<authentication>digest</authentication>
+						<debugAllow>false</debugAllow>
+						<profileAllow>false</profileAllow>
+					</server>
+				</dir>
+			</dir>
+		</db>
+	</dbs>
+
+	<!-- commands inside this tag are run last (after everything is created and enabled) -->
+	<commands phase="post"> 
+		<execute file="/install/initializeUsers.xqy" db="*XQDebug"/>
+	</commands>
+	
+</application>
