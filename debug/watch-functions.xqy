@@ -41,7 +41,7 @@ as element(watchExprs)
 		      if ( fn:exists($reqId ) ) 
 		      then 
 		        try{ 
-		          dbg:value( $reqId, $expr ) 
+		          xdmp:quote( dbg:value( $reqId, $expr ) )
 		        } 
 		        catch( $ex ) {
             	fn:concat( "<", $ex/error:code, ": ", $ex/error:message, ">" )

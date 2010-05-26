@@ -322,7 +322,7 @@ as element(div)
               return
                 <tr class="frame_variable {if ($i mod 2) then "odd" else ()}">
                   <td></td>
-                  <td>{ fn:concat( $var/dbg:prefix, $var/dbg:name ) }</td>
+                  <td>{ fn:QName( $var/dbg:prefix/@xmlns/fn:data(.), $var/dbg:name/xs:string(.) ) }</td>
                   <td>{ $var/dbg:value/fn:data(.) }</td>
                 </tr>
             )
