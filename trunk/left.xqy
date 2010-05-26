@@ -7,22 +7,11 @@ import module namespace mhtml = "/xqdebug/html/html" at "/html/html.xqy";
 import module namespace security = "/xqdebug/security/security" at "security/security.xqy";
 import module namespace tables="/xqdebug/html/tables" at "/html/tables.xqy";
 
-declare namespace as="http://marklogic.com/xdmp/assignments";
-declare namespace db="http://marklogic.com/xdmp/database";
-declare namespace fs="http://marklogic.com/xdmp/status/forest";
-declare namespace gr="http://marklogic.com/xdmp/group";
-declare namespace ho="http://marklogic.com/xdmp/hosts";
-declare namespace hs="http://marklogic.com/xdmp/status/host";
-declare namespace mi="http://marklogic.com/xdmp/mimetypes";
-declare namespace sec = "http://marklogic.com/xdmp/security";
-declare namespace ss="http://marklogic.com/xdmp/status/server";
-declare namespace xhtml="http://www.w3.org/1999/xhtml";
-
 declare option xdmp:mapping "false";
 
 (: Store all request fields to session fields :)
-let $isAdmin  := xdmp:has-privilege("http://marklogic.com/xdmp/privileges/debug-any-requests", "execute")
-let $fields := xdmp:get-request-field-names()
+let $isAdmin := xdmp:has-privilege("http://marklogic.com/xdmp/privileges/debug-any-requests", "execute")
+let $fields  := xdmp:get-request-field-names()
 let $session := for $field in $fields return xdmp:set-session-field($field, xdmp:get-request-field($field))
 
 return (
@@ -37,17 +26,11 @@ xdmp:set-response-content-type("text/html"),
 <body>
 <table style="background-color:#E2E2E2; width:100%; border: 1px solid black;" cellspacing="0" cellpadding="0">
   <tr>
-    <td align="left" width="100" style="border: 0;">
-      <img src="/assets/images/XQDebug-in-crosshairs.jpg" vspace="3" width="50" height="50"/>
-    </td>
-    <td class="banner" style="text-align: left; vertical-align: middle;;">
+    <td class="banner" style="text-align:center;vertical-align:middle;;">
       <strong>XQDebug</strong>
     </td>
   </tr>
 </table>
-<!-- 
-<h4>Commands</h4>
--->
 <div style="clear:both">
 {
   if ($isAdmin) 
@@ -111,18 +94,18 @@ xdmp:set-response-content-type("text/html"),
   	mhtml:fieldset("Debugger", "expand",
   	 <b>Debugger</b>,
   	 <ul id="dbg_session">
-  	   <li  id="dbg_connect"><a href="/debug/connect.xqy" target="resultFrame">Connect / Disconnect</a></li>
-  	   <li  id="dbg_stopped_requests"><a href="/debug/requestList.xqy#currentExpr" target="resultFrame">Debug Window</a></li>
-  	   <li  id="dbg_breakpoints"><a href="/debug/breakpoints.xqy?display=true" target="resultFrame">Breakpoints</a></li>
-  	   <li  id="dbg_watchexp"><a href="/debug/watch.xqy?display" target="resultFrame">Watch Expressions</a></li>
-  	   <li  id="dbg_stack"><a href="/debug/stack.xqy" target="resultFrame">Stack</a></li>
+  	   <li id="dbg_connect"><a href="/debug/connect.xqy" target="resultFrame">Connect / Disconnect</a></li>
+  	   <li id="dbg_stopped_requests"><a href="/debug/requestList.xqy#currentExpr" target="resultFrame">Debug Window</a></li>
+  	   <li id="dbg_breakpoints"><a href="/debug/breakpoints.xqy?display=true" target="resultFrame">Breakpoints</a></li>
+  	   <li id="dbg_watchexp"><a href="/debug/watch.xqy?display" target="resultFrame">Watch Expressions</a></li>
+  	   <li id="dbg_stack"><a href="/debug/stack.xqy" target="resultFrame">Stack</a></li>
   	   <li id="dbg_stepping">Execution
   	     <ul>
-    	   <li  id="dbg_step"><a href="/debug/step.xqy?op=step" target="resultFrame">Step</a></li>
-    	   <li  id="dbg_out"><a href="/debug/step.xqy?op=out" target="resultFrame">Next Expression</a></li>
-    	   <li  id="dbg_next"><a href="/debug/step.xqy?op=next" target="resultFrame">Next Statement</a></li>
-    	   <li  id="dbg_finish"><a href="/debug/step.xqy?op=finish" target="resultFrame">Finish Function</a></li>
-    	   <li  id="dbg_continue"><a href="/debug/step.xqy?op=continue" target="resultFrame">Continue</a></li>
+    	   <li id="dbg_step"><a href="/debug/step.xqy?op=step" target="resultFrame">Step</a></li>
+    	   <li id="dbg_out"><a href="/debug/step.xqy?op=out" target="resultFrame">Step Out</a></li>
+    	   <li id="dbg_next"><a href="/debug/step.xqy?op=next" target="resultFrame">Next Statement</a></li>
+    	   <li id="dbg_finish"><a href="/debug/step.xqy?op=finish" target="resultFrame">Finish Function</a></li>
+    	   <li id="dbg_continue"><a href="/debug/step.xqy?op=continue" target="resultFrame">Continue</a></li>
     	   </ul>
   	   </li>
   	 </ul>
