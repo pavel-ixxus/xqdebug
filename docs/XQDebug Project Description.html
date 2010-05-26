@@ -12,11 +12,8 @@
   <div id="project-overview">
     <h2>Project Overview:</h2>
 
-    <p>This is a project description for XQuery debugger for
-    MarkLogic XQuery applications.</p>
-
-    <p>The goal is to provide a Browser based debugger that is
-    independent of any editor or browser, that can be installed and available for developers and
+    <p>The goal of XQDebug is to provide a Browser based debugger that is
+    independent of any editor or browser, and can be installed and available for developers and
     administrators to develop and debug applications.</p>
 
     <p>XQDebug uses the MarkLogic debugging (dbg) API as much as
@@ -25,15 +22,22 @@
     until a fix or update is available.</p>
     
     <p>XQDebug must run from and write to a database that is independent of any
-      application or XQuery code that it is debugging. Otherwise it is possible
+      application or XQuery code that being debugged. Otherwise it is possible
       to introduce changes in the state of the application that is being debugged.
       Therefore the install must create a database named XQDebug and copy all
       code and write all persisted information to that database.
     </p>
+    
   </div>
   
   <div id="task_list">
-    <h2>Prioritized Task/Feature List:</h2>
+    <h2>Prioritized Task (Feature) List:</h2>
+    
+    <p>The priority of this list is only approximate because features are also grouped 
+      logically and some featues in a group have a lower priority of being implemented.
+      The features which are listed in <strong class="unimplemented">red</strong> have not been implemented yet.
+    </p>
+    
     <ol>
      <li>Windowing and window Layout (As functionality is added ...)</li>
      <li>Debug environment
