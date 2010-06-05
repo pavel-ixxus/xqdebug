@@ -76,8 +76,8 @@ XQDebug must run from and write to a database that is independent of any applica
     * <font color="red">Global variables</font>
     * <font color="red">External variables</font>
   # Standalone Deployment program 
-  # Watch window expressions 
-<font color="red">  # Invoke module for debugging 
+  # Watch window expressions <font color="red">
+  # Invoke module for debugging 
     * browser style URL for HTTP 'GET 
     * setup 'POST' frame 
     * jQuery select from application source files 
@@ -106,17 +106,17 @@ XQDebug must run from and write to a database that is independent of any applica
     * ...</font>
   # CSS for display styles: 
     * Breakpoints 
-    * Hover on expression (highlight containing expression) 
+    * <font color="red">Hover on expression (highlight containing expression)</font>
 
 === Debug Information Persisted to User Session File in XQDebug Database (As needed): ===
 
   # All debug information associated with User Name 
   # App Server(s) State (Connected/Disconnected) 
-    * On Connect: 
+    * On Connect: <font color="red">
       * Create list of all .xqy files in app-server modules DB below modules root 
-      * Save last expr-id of each line of each file 
+      * Save last expr-id of each line of each file </font>
   # Current request 
-  # Watch expressions 
+  # Watch expressions <font color="red">
   # Breakpoints 
   # Associate Applications with their servers, databases and XQuery modules 
   # Eval Expression 
@@ -128,7 +128,7 @@ XQDebug must run from and write to a database that is independent of any applica
     * Breakpoints 
     * Functions - line, expr Id 
   # A link for each expression and it's text 
-  # Window sizes and placement 
+  # Window sizes and placement </font>
 
 === Display of Configuration information ===
   # Users 
@@ -137,6 +137,6 @@ XQDebug must run from and write to a database that is independent of any applica
   # Collections 
   # Execute Privileges 
   # URI Privileges 
-  # Permissions: (Explorer like tree view of directories and files) 
+  # Permissions: <font color="red">(Explorer like tree view of directories and files) 
     * Side by side view with users and roles 
-    * Highlight users with or without necessary roles to view/access files and directories. 
+    * Highlight users with or without necessary roles to view/access files and directories. </font>
