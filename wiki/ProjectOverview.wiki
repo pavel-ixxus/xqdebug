@@ -10,6 +10,9 @@ XQDebug uses the MarkLogic debugging (dbg) API as much as possible to accomplish
 XQDebug must run from and write to a database that is independent of any application or XQuery code that it is debugging. Otherwise it is possible to introduce changes in the state of the application that is being debugged. Therefore the install must create a database named XQDebug and copy all code and write all persisted information to that database. 
 
 == Prioritized Feature List: ==
+The priority order of this feature list is only approximate because features are also grouped logically and some features in a group have a lower priority of being implemented. 
+
+The <font color="red">features which are listed in red have not been implemented yet</font>. 
 
   # Windowing and window Layout (As functionality is added ...) 
   # Debug environment
