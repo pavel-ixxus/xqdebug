@@ -46,19 +46,19 @@ XQDebug must run from and write to a database that is independent of any applica
     * On connect create list of all .xqy URIs available for debugging on that server. 
   # Attach/Detach/<font color="red">Break into Request</font>
     * List of Requests (table or window): stopped, debugging 
-    * List of Running requests with link or button to stop or break into the request for debugging 
+    * <font color="red">List of Running requests with link or button to stop or break into the request for debugging</font>
   # Expression Display 
     * Retrieve and Persist Expression IDs 
       * Retrieve & display source line(s) 
       * Page 
       * Source File 
         * Source for current expression 
-        * Select source file to display from application servers .xqy list. 
+        * <font color="red">Select source file to display from application servers .xqy list.</font>
   # Execution 
     * Display 
       * Scroll source window so to current line.
     * Stop & Continue 
-      * jQuery for step/wait/eval
+      * <font color="red">jQuery for step/wait/eval</font>
     * Step 
       * Step 
       * Step Out (Next Expression) 
@@ -69,15 +69,15 @@ XQDebug must run from and write to a database that is independent of any applica
     * Set 
     * Display 
     * Clear 
-    * Persist Breakpoints between sessions 
+    * <font color="red">Persist Breakpoints between sessions</font>
   # Stack Trace Frames with: 
     * Source Line 
     * Variables 
-    * Global variables 
-    * External variables 
+    * <font color="red">Global variables</font>
+    * <font color="red">External variables</font>
   # Standalone Deployment program 
   # Watch window expressions 
-  # Invoke module for debugging 
+<font color="red">  # Invoke module for debugging 
     * browser style URL for HTTP 'GET 
     * setup 'POST' frame 
     * jQuery select from application source files 
@@ -103,7 +103,7 @@ XQDebug must run from and write to a database that is independent of any applica
       * Variable type 
       * Add to watch expressions 
       * Run to cursor 
-    * ... 
+    * ...</font>
   # CSS for display styles: 
     * Breakpoints 
     * Hover on expression (highlight containing expression) 
