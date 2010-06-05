@@ -44,7 +44,7 @@ XQDebug must run from and write to a database that is independent of any applica
       * Application server settings for debug, profile & logging 
       * Default modules and content databases 
     * On connect create list of all .xqy URIs available for debugging on that server. 
-  # Attach/Detach/Break into Request
+  # Attach/Detach/<font color="red">Break into Request</font>
     * List of Requests (table or window): stopped, debugging 
     * List of Running requests with link or button to stop or break into the request for debugging 
   # Expression Display 
