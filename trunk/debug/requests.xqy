@@ -52,7 +52,7 @@ declare function request:trimRoot( $db as xs:unsignedLong, $rootDir )
 as xs:string
 {
     if ($db eq 0 and (xdmp:platform() eq "winnt"))
-    then fn:replace( $rootDir, "^(.*)\\$", "$1" )
+    then fn:replace( $rootDir, "^(.*)[\\/]$", "$1" )
     else fn:replace( $rootDir, "^(.*)/$", "$1" )
 };
 
@@ -101,7 +101,7 @@ declare function request:listSource( $reqId as xs:unsignedLong )
   @param  $uri    The relative URI of the source file to list.
   @param  $current  The current line number
 ~:)
-declare function request:listSource( $reqId as xs:unsignedLong, $db as xs:unsignedLong, $root as xs:string, $uri as xs:string, $current as xs:unsignedLong )
+declare function request:listSource( $reqId as xs:unsignedLong, $db as xs:unsignedLong, $root as xs:string, $uri as xs:string?, $current as xs:unsignedLong? )
 {
   if ( ($db ne 0) and (xdmp:database() ne $db ))
   then iv:invoke( xdmp:database-name($db), xdmp:function(xs:QName("request:listSource"),"/debug/requests.xqy"), $reqId, $db, $root, $uri, $current )
@@ -110,12 +110,16 @@ declare function request:listSource( $reqId as xs:unsignedLong, $db as xs:unsign
     let $uri := if ($uri eq "/") then "/default.xqy" else $uri
     let $rootDir := request:trimRoot( $db, $root )
     let $path := fn:concat( $rootDir, $uri )
-    let $content := fn:tokenize( request:getSourceFile( $db, $path), "\n")
+    let $content := 
+          if ( fn:empty( $uri ) or fn:empty( $current ) ) 
+          then () 
+          else fn:tokenize( request:getSourceFile( $db, $path), "\n" )
     let $bpExprs := for $bp in dbg:breakpoints( $reqId ) 
                     return dbg:expr($reqId, $bp )[dbg:uri eq $uri]
     let $bpLines := $bpExprs/xs:unsignedLong(dbg:line)
     return 
-    <div class="tableContainer" id="dbg_src" uri="{$path}" db="{$db}">
+    <code>
+    <span class="tableContainer" id="dbg_src" uri="{$path}" db="{$db}">
       {if ($current ne 0) then attribute line {$current} else () }
       <table frame="box" rules="cols" id="dbg_src_table">
         <caption>Module: {$path}</caption>
@@ -135,7 +139,7 @@ declare function request:listSource( $reqId as xs:unsignedLong, $db as xs:unsign
               {
                 if ( $i eq $current )
                 then ( attribute class { "currentExpr" }, attribute name { "currentExpr" }, attribute id { "currentExpr" } )
-                else if ($i mod 2 eq 0) 
+                else if ($i mod 2 eq 0)
                 then attribute class { "odd" }
                 else ()
               }
@@ -146,9 +150,7 @@ declare function request:listSource( $reqId as xs:unsignedLong, $db as xs:unsign
                   <a target="resultFrame" href="/debug/breakpoints.xqy?clrbp={ $bpExprs[dbg:line eq $i]/dbg:expr-id/fn:data(.) }">&empty;</a>
                 )
                 else 
-                  let $lineExpr := try { dbg:line( $reqId, $uri, $i)[fn:last()] } catch ($ex) { 0 }
-                  return
-                    <a target="resultFrame" href="/debug/breakpoints.xqy?setbp={ $lineExpr }">&oplus;</a>
+                  <a target="resultFrame" href="/debug/breakpoints.xqy?setbp={ try { dbg:line( $reqId, $uri, $i)[fn:last()] } catch ($ex) { 0 } }">&oplus;</a>
               }</td>
               <td>{ $i }</td>
               <td class="src">{ $src }</td>
@@ -156,7 +158,8 @@ declare function request:listSource( $reqId as xs:unsignedLong, $db as xs:unsign
         }
         </tbody>
       </table>
-    </div>
+    </span>
+    </code>
   )
 };
 

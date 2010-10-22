@@ -7,6 +7,8 @@ import module namespace setting = "/xqdebug/debug/session" at "/debug/session.xq
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>XQDebug</title>
+    <meta http-equiv="cache-control" content="no-cache"/> 
+    <meta http-equiv="pragma" content="no-cache"/> 
     <link rel="icon" type="image/png" href="/favicon.png" />
 	</head>
 	<frameset cols="20%, *" framespacing="1" frameborder="1">

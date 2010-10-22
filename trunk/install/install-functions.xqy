@@ -23,7 +23,10 @@ as empty-sequence()
   then iv:invoke( $dbname, xdmp:function( xs:QName("install:loadZip"), "" ), $dbname, $dirname, $file )
   else (
     for $name in xdmp:zip-manifest( $file )/zip:part[@uncompressed-size ne 0]/fn:data(.)
-    return xdmp:document-insert( fn:concat( $dirname, $name ), xdmp:zip-get( $file, $name ) )
+    return
+      if ( fn:starts-with($name, "__MACOS") or fn:starts-with( $name, "." ) )
+      then ()
+      else xdmp:document-insert( fn:concat( $dirname, $name ), xdmp:zip-get( $file, $name ) )
   )
 };
 

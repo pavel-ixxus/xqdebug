@@ -24,6 +24,8 @@ return (
     <head>
       <title>Stack Frame Page</title>
       <meta name="robots" content="noindex,nofollow"/>
+      <meta http-equiv="cache-control" content="no-cache"/> 
+      <meta http-equiv="pragma" content="no-cache"/> 
       <link rel="stylesheet" href="/assets/styles/xqdebug.css"/>
     </head>
     <body> 
@@ -40,6 +42,10 @@ return (
         else ()
       }
     </body>
+    <head>
+      <!-- NOTE: This header IS a work around for and IE bug (http://support.microsoft.com/kb/222064) -->
+      <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"/>
+    </head>
   </html>
 )
 
