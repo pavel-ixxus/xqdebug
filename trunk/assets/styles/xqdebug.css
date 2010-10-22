@@ -166,7 +166,6 @@ input.hidden {
     display: none;
 }
 div#req-table {
-  height:74px;
   width:100%;
 }
 div#dbg_stack {
