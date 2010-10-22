@@ -21,7 +21,8 @@ body {
 	background: grey;
 }
 table { 
-	empty-cells:show; 
+	empty-cells:show;
+	width: 100%;
   text-align: left;
 }
 td a {
@@ -92,7 +93,7 @@ textarea {
     font-family: Arial, Helvetica;
     font-size: 10pt;
 }
-div.tableContainer, pre, textarea {
+span.tableContainer, pre, textarea {
 	overflow: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
 	white-space: pre-wrap; /* css-3 */
 	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
@@ -100,15 +101,18 @@ div.tableContainer, pre, textarea {
 	white-space: -o-pre-wrap; /* Opera 7 */
 	word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
-div.tableContainer table {
+span.tableContainer table {
   width: 100%;
   float: left;
 }
 div.wrapper {
-  border: 1px solid black; 
+  min-width:1058px;
+  border: 0px; 
   border-collapse: collapse;
+  padding: 0px 0px; 
+  margin: 0px 0px;
 }
-div.wrapper, h2, h3, h4, pre, div {
+h2, h3, h4, pre, div {
   width: 100%;
   padding: 0px 0px; 
   margin: 0px 0px;
@@ -162,7 +166,7 @@ input.hidden {
     display: none;
 }
 div#req-table {
-  height:70px;
+  height:74px;
   width:100%;
 }
 div#dbg_stack {
@@ -224,5 +228,14 @@ div#dbg_bp {
 	float: left;
 	margin: 0;
 	padding: 0 1em 0 1em;
+}
+.viewport {
+overflow: auto;
+}
+.resizable {
+border: 1px solid black;
+}
+.ui-resizable-resizing {
+border: 2px dashed black !important;
 }
 

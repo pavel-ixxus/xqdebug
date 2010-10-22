@@ -8,6 +8,7 @@ module namespace watch="/xqdebug/debug/watch-expressions";
 
 import module namespace request="/xqdebug/debug/requests" at "/debug/requests.xqy";
 import module namespace setting = "/xqdebug/debug/session" at "/debug/session.xqy";
+import module namespace win = "/xqdebug/debug/window-expressions" at "/debug/window-functions.xqy";
 import module namespace tables="/xqdebug/html/tables" at "/html/tables.xqy";
 
 declare namespace ss="http://marklogic.com/xdmp/status/server";
@@ -82,8 +83,9 @@ as element(div)
 declare function watch:watchBlock( $reqId as xs:unsignedLong?, $watchExprs as element(watch-expr)*, $display as xs:boolean )
 as element(div)
 {
-  <div id="dbg_watch_wrap" class="wrapper">
-    <h4>Watch Expressions</h4>
+  <div class="resizable" style="{win:getParentStyle('dbg_watch_wrap')}">
+  <div id="dbg_watch_wrap" class="viewport wrapper" style="{win:getStyle('dbg_watch_wrap')}">
+    <h3>Watch Expressions</h3>
     <div id="dbg_watch" class="tableContainer">
       <form id="form_watch" method="post" >
         { 
@@ -95,6 +97,7 @@ as element(div)
         }
       </form>
     </div>
+  </div>
   </div>
 };
 

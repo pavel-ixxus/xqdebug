@@ -242,43 +242,6 @@ catch ($ex) {
 ;
 
 
-(: ***** Load Modules into Database ***** :)
-xquery version "1.0-ml";
-import module namespace iv="/xqdebug/shared/common/invoke" at "../shared/common/invoke/invokeFunctions.xqy";
-import module namespace install="xqdebug/install-functions" at "/xqdebug/install/install-functions.xqy";
-import module namespace util = "http://marklogic.com/xdmp/utilities" at "/MarkLogic/utilities.xqy";
-declare variable $dbg-db-name := "XQDebug";
-declare variable $modules-dir := "/code/xqdebug/";
-"", fn:concat( "Load Modules into Database... " )
-,
-try {
-  let $filename := "/code/xqdebug/xqdebug.zip"
-  let $dir := fn:concat( xdmp:install-directory(), "/", xdmp:modules-root(), "xqdebug")
-  let $file := xdmp:filesystem-directory( $dir )/*:entry[fn:ends-with(*:filename, ".zip") or fn:ends-with(*:filename, ".xar")][fn:starts-with(*:filename, "xqdebug")][1]/*:pathname/fn:data(.)
-  let $assert := 
-        if ( fn:empty($file) ) 
-        then 
-          fn:error( xs:QName("ZIP-MISSING"), fn:concat("Could not find XQDebug zip file in ", $dir, "'") )
-        else ()
-  let $options := <options xmlns="xdmp:document-load"><uri>{$filename}</uri></options>
-  let $load := xdmp:document-load($file, $options)
-  return (
-    fn:concat( "Loaded zip file '", $file, "' into database at '", $filename, "'" )
-    ,
-    install:loadZip( $dbg-db-name, $modules-dir, fn:doc($filename) )
-    ,
-    "Modules Loaded."
-  )
-}
-catch ($ex) {
-  (: If any of these directories exist ... then we missed a step. :)
-  if ( $ex/error:code eq "XDMP-DIREXISTS" )
-  then fn:error( $ex/error:code, "Directories should have been deleted in previous step.", $ex ) 
-  else xdmp:rethrow()
-}
-;
-
-
 (: ***** Create URI Privileges ***** :)
 xquery version "1.0-ml";
 import module namespace iv="/xqdebug/shared/common/invoke" at "../shared/common/invoke/invokeFunctions.xqy";
@@ -322,6 +285,43 @@ catch ($ex) {
   else xdmp:rethrow()
 }
 ;
+
+(: ***** Load Modules into Database ***** :)
+xquery version "1.0-ml";
+import module namespace iv="/xqdebug/shared/common/invoke" at "../shared/common/invoke/invokeFunctions.xqy";
+import module namespace install="xqdebug/install-functions" at "/xqdebug/install/install-functions.xqy";
+import module namespace util = "http://marklogic.com/xdmp/utilities" at "/MarkLogic/utilities.xqy";
+declare variable $dbg-db-name := "XQDebug";
+declare variable $modules-dir := "/code/xqdebug/";
+"", fn:concat( "Load Modules into Database... " )
+,
+try {
+  let $filename := "/code/xqdebug/xqdebug.zip"
+  let $dir := fn:concat( xdmp:install-directory(), "/", xdmp:modules-root(), "xqdebug")
+  let $file := xdmp:filesystem-directory( $dir )/*:entry[fn:ends-with(*:filename, ".zip") or fn:ends-with(*:filename, ".xar")][fn:starts-with(*:filename, "xqdebug")][1]/*:pathname/fn:data(.)
+  let $assert := 
+        if ( fn:empty($file) ) 
+        then 
+          fn:error( xs:QName("ZIP-MISSING"), fn:concat("Could not find XQDebug zip file in ", $dir, "'") )
+        else ()
+  let $options := <options xmlns="xdmp:document-load"><uri>{$filename}</uri></options>
+  let $load := xdmp:document-load($file, $options)
+  return (
+    fn:concat( "Loaded zip file '", $file, "' into database at '", $filename, "'" )
+    ,
+    install:loadZip( $dbg-db-name, $modules-dir, fn:doc($filename) )
+    ,
+    "Modules Loaded."
+  )
+}
+catch ($ex) {
+  (: If any of these directories exist ... then we missed a step. :)
+  if ( $ex/error:code eq "XDMP-DIREXISTS" )
+  then fn:error( $ex/error:code, "Directories should have been deleted in previous step.", $ex ) 
+  else xdmp:rethrow()
+}
+;
+
 
 (: ************************* Initialize User Session Files ************************* :)
 xquery version "1.0-ml";
