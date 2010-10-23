@@ -87,12 +87,12 @@ The <font color="red">features which are listed in red have not been implemented
   # Eval() expression for debugging 
     * CQ style textbox to edit and expression 
     * Button to run an expression ... except on execution expression is stopped on first line for debugging 
-    * Results window 
+    * Results window </font>
   # Windows & tables 
     * Expand & collapse 
     * Persist between sessions 
     * Resizing 
-    * Placement (rearrange) on screen 
+    <font color="red">* Placement (rearrange) on screen 
   # Source Editing: 
     * jQuery source editor 
     * Edit 
