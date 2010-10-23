@@ -89,10 +89,10 @@ The <font color="red">features which are listed in red have not been implemented
     * Button to run an expression ... except on execution expression is stopped on first line for debugging 
     * Results window </font>
   # Windows & tables 
-    * Expand & collapse 
-    * Persist between sessions 
-    * Resizing 
-    <font color="red">* Placement (rearrange) on screen 
+    * Resize, Expand & collapse
+      * Persist size between sessions 
+    *  <font color="red">Placement (rearrange) on screen
+      * Persist location between sessions
   # Source Editing: 
     * jQuery source editor 
     * Edit 
