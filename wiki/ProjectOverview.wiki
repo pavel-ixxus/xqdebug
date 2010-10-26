@@ -1,5 +1,5 @@
 #summary This is a project description for XQuery debugger for MarkLogic XQuery applications.
-#labels Project-Overview
+#labels Project-Overview,Featured
 
 = XQDebug - MarkLogic XQuery Debugger =
 == Project Overview: ==
@@ -130,8 +130,8 @@ The <font color="red">features which are listed in red have not been implemented
     * Expression IDs by line # 
     * Breakpoints 
     * Functions - line, expr Id 
-  # A link for each expression and it's text 
-  # Window sizes and placement </font>
+  # A link for each expression and it's text </font>
+  # Window sizes<font color="red"> and placement </font>
 
 === Display of Configuration information ===
   # Users 
