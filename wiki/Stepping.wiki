@@ -1,0 +1,18 @@
+#labels Featured
+#Stepping functions and when to use them.
+
+= Stepping in XQuery =
+
+Stepping is definitely one of the most confusing parts of debugging a functional language like XQuery.  Stepping in XQuery is by expression, not lines of code as you would in Java or C#.  If you keep this in mind it will begin to make some sense.
+
+= Descriptions of the stepping functions =
+
+“Step” will step into a sub expression or to the end of the current expression.  This is the preferred method of stepping unless one of the other methods make more sense.
+
+“Step Out” will step to the end of the current expression… If you look at the stack frame you will see what the current expression is and can gauge where you will step to.  In my code, the current FLOWR expression can sometimes be the entire module.  So use “Step”ping to drill down into sub expressions and then “Step Out” to wind your way back out.  But keep in mind that if you are at the end of the last sub-expression of a parent expression you will step ‘out’ to the end of a parent of all sub expressions that are at their end, which as we observed could be the end of your module.
+
+“Next Statement” Statements are import, declare and FLOWR statements ... anything that ends with a semicolon.  Think of Next Statement as “I want to jump to the statement after the next semicolon.”
+
+“Step Function” Steps to the end of the current function.  If you are not in a function execution will continue until the request finishes execution.
+
+Revision 1.0.2 added some hover tips that should help.  If you hover over the “Step” link a popup description will say “Step to the beginning or end of current expression.” Step Out says something like “Continue evaluation to the End of the Current Expression.” Next Statement ...
