@@ -147,10 +147,15 @@ declare function request:listSource( $reqId as xs:unsignedLong, $db as xs:unsign
                 if ( $i = $bpLines ) 
                 then (
                   attribute class { "breakpoint" },
-                  <a target="resultFrame" href="/debug/breakpoints.xqy?clrbp={ $bpExprs[dbg:line eq $i]/dbg:expr-id/fn:data(.) }">&empty;</a>
+                  <a target="resultFrame" href="/debug/breakpoints.xqy?clrbp={ $bpExprs[dbg:line eq $i]/dbg:expr-id/fn:data(.) }">&Oslash;</a>
                 )
-                else 
-                  <a target="resultFrame" href="/debug/breakpoints.xqy?setbp={ try { dbg:line( $reqId, $uri, $i)[fn:last()] } catch ($ex) { 0 } }">&oplus;</a>
+                else (
+                  let $bpId := try { dbg:line( $reqId, $uri, $i)[fn:last()] } catch ($ex) { 0 }
+                  return
+                    if ( $bpId > 0 )
+                    then <a target="resultFrame" href="/debug/breakpoints.xqy?setbp={ $bpId }">&oplus;</a>
+                    else <span>&mdash;</span>
+                )
               }</td>
               <td>{ $i }</td>
               <td class="src">{ $src }</td>
@@ -216,7 +221,7 @@ as element(requests)
 	<requests ftype="table" name="dbgReqTbl">
 		<format name="request" title="Request">
 			<cell name="appserver-name" title="App Server"style="text-align:left" />
-			<cell name="reqId" title="ID"/>
+			<cell name="reqId" title="Request ID"/>
 			<cell name="detach" title="Detach"/>
 			<cell name="hostName" title="Host" />
 			<cell name="modDbName" title="Modules" />
@@ -254,7 +259,7 @@ as element(requests)
 		  <request ftype="row">
 				<appserver-name>{$svr}</appserver-name>
 				<reqId>{<a target="resultFrame" href="/debug/requestList.xqy?req={$id}#currentExpr">{$id}</a>}</reqId>
-				<detach>{<a target="resultFrame" href="/debug/attach.xqy?detach={$id}">detach</a>}</detach>
+				<detach>{<a target="resultFrame" href="/debug/attach.xqy?detach={$id}" title="Detach from request and allow it to run to completion.">detach</a>}</detach>
 				<hostName>{$host}</hostName>
 				<modDbName>{$modDb}</modDbName>
 				<databaseName>{xdmp:database-name($dbId)}</databaseName>
