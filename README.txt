@@ -43,3 +43,17 @@ features and enhancements is contained in the file:
 
 Enjoy!
 
+******************************* Known Issues ***********************************
+- Breakpoints can't be set in some files. (Most common are files that have been 
+  invoked with xdmp:invoke() or reside in protected filesystem directories.)  If 
+  breakpoint information is not available for a particular line of source code
+  a dash "—" will appear in the breakpoint column of the source window.
+
+******************************** Change Log ************************************
+Version 1.0.2:
+- Database Explorer no longer requires a URI Lexicon on the target database.
+- Added ability to resize windows and persist window sizes between sessions. 
+    (Special thanks to Michael Fagan for the resize enhancement.)
+- Fixed 404 error after running install.(Workaround, run install a second time.)
+- Can now display source modules on file system in MarkLogic's Modules directory.
+- Added no-cache directives to all pages so browsers don't cache debugger pages.
