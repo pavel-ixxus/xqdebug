@@ -11,7 +11,7 @@ Stepping is definitely one of the most confusing parts of debugging a functional
 _Step_ will step into a sub-expression or to the end of the current expression.  This is the preferred method of stepping unless you know one of the other methods make more sense.
 
 *Step Out:*  
-_Step Out_ will step to the end of the current expression… If you look at the stack frame you will see what the current expression is and can gauge where you will step to.  In my code, the current FLOWR expression can sometimes be the entire module.  So use _Step_ to drill down into sub expressions and then _Step Out_ to wind your way back out.  But keep in mind that if you are at the end of the last sub-expression of a parent expression you will _Step Out_ to the end of the parent of all sub expressions that are at their end, which as we observed could be the end of your module.
+_Step Out_ will step to the end of the current expression… If you look at the stack frame you will see what the current expression is and can gauge where you will step to.  In my code, the current FLOWR expression can sometimes be the entire module.  So use _Step_ to drill down into sub expressions and then _Step Out_ to wind your way back out.  But keep in mind that if you are at the end of the last sub-expression of a parent expression you will _Step Out_ to the end of the parent of all sub expressions that are at their end, which may be the end of your module.
 
 *Next Statement:*  
 Statements are import, declare and FLOWR statements ... anything that ends with a semicolon.  Think of Next Statement as “I want to jump to the statement after the next semicolon.”
