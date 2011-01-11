@@ -47,7 +47,7 @@ The <font color="red">features which are listed in red have not been implemented
       * Application server settings for debug, profile & logging 
       * Default modules and content databases 
     * On connect create list of all .xqy URIs available for debugging on that server. 
-  # Attach/Detach/<font color="red">Break into Request</font>
+  # <font color="red">Attach</font>/Detach/<font color="red">Break into Request</font>
     * List of Requests (table or window): stopped, debugging 
     * <font color="red">List of Running requests with link or button to stop or break into the request for debugging</font>
   # Expression Display 
