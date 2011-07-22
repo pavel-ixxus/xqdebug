@@ -170,7 +170,7 @@ xdmp:set-response-content-type("text/html"),
 	else <p>Unknown Status request: {$title}</p>
 }</body>
   <head>
-    <!-- NOTE: This header IS a work around for and IE bug (http://support.microsoft.com/kb/222064) -->
+    <!-- NOTE: This header is a workaround for an IE bug (http://support.microsoft.com/kb/222064) -->
     <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"/>
   </head>
 </html>

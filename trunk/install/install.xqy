@@ -13,7 +13,8 @@ import module namespace iv="/xqdebug/shared/common/invoke" at "../shared/common/
 import module namespace sec="http://marklogic.com/xdmp/security" at "/MarkLogic/security.xqy";
 declare variable $dbg-role-name := "_xqdebug-role";
 
-fn:concat( "XQDebug Install Start ..." )
+let $file := fn:concat( xdmp:install-directory(), "/", xdmp:modules-root(), "xqdebug/versions.xml")
+return fn:concat( "XQDebug ", xdmp:document-get( $file )/project/version/text(), " Install Start ..." )
 ,
 
 (: ********************* Create Roles ********************* :)
@@ -136,7 +137,8 @@ declare variable $dbg-db-name := "XQDebug";
 (: We already created the DB.  If it doesn't exist now xdmp:database() will throw an exception ... let it. :)
 let $dbId := xdmp:database( $dbg-db-name )
 let $config := admin:database-set-uri-lexicon( admin:get-configuration(), $dbId, fn:true())
-let $config := admin:database-set-collection-lexicon($config, $dbId, fn:true())
+let $config := admin:database-set-collection-lexicon( $config, $dbId, fn:true())
+let $config := admin:database-set-triggers-database( $config, $dbId, $dbId ) (: Set triggers DB to XQDebug DB :)
 (: Adding a lexicon that already exists will throw a exception ... check existence and add. :)
 let $config := 
     if ( fn:not( "http://marklogic.com/collation/codepoint" = admin:database-get-word-lexicons( $config, $dbId ) ) )
@@ -395,4 +397,8 @@ fn:concat( "Configured Appserver '", $server-name, "'." )
 
 
 (: ********************************** FINISHED ***************************************** :)
-"", fn:concat( "XQDebug Install: Finished!!!" )
+let $file := fn:concat( xdmp:install-directory(), "/", xdmp:modules-root(), "xqdebug/versions.xml")
+return (
+  "", 
+  fn:concat( "XQDebug ", xdmp:document-get( $file )/project/version/text(),  " Install: Finished!!!" )
+)

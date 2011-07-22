@@ -63,7 +63,7 @@ return (
       </div><br/>
       <div id="current-req">
         { 
-          if ( fn:exists($reqId) ) 
+          if ( fn:exists($reqId) and ($reqId = dbg:stopped()) ) 
           then
             let $rstat := request:status($reqId)/ss:request
             let $expr := dbg:stack( $reqId )/dbg:expr
@@ -95,13 +95,13 @@ return (
               </div>
               </div>,<br/>
             )
-          else ()
+          else xdmp:redirect-response( "/debug/requestList.xqy#currentExpr" )
         }
       </div>
     </body>
     
     <head>
-      <!-- NOTE: This header IS a work around for and IE bug (http://support.microsoft.com/kb/222064) -->
+      <!-- NOTE: This header is a workaround for an IE bug (http://support.microsoft.com/kb/222064) -->
       <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"/>
     </head>
   </html>
