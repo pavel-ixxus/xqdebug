@@ -16,23 +16,24 @@ declare option xdmp:mapping "false";
 declare variable $g_reqTimeout := 30; (: set default timeout :)
 
 (:~
-  Get the current request to debug.
+  Get the current request to debug. If no request current then select the first request
+  returned by dbg:attached()/dbg:stopped().
   @return current request ID.
 ~:)
 declare function request:current()
 as xs:unsignedLong?
 {
   let $req := xs:unsignedLong(setting:getField( "dbgReqId" ))
-  let $stopped := request:stopped()
+  let $stopped := dbg:stopped()
+  let $attached := dbg:attached()
   return
     if ( fn:exists( $req ) and ($req = $stopped) )
     then $req
-    else request:current( $stopped[1] )
+    else request:current( $attached[fn:last()] )
 };
 
 (:~
-  Set the current request to debug. If the request passed is () then select the first request
-  returned by dbg:attached().
+  Set the current request to debug.
   @param $reqId Request to debug.
   @return $reqId.
 ~:)
@@ -125,9 +126,9 @@ declare function request:listSource( $reqId as xs:unsignedLong, $db as xs:unsign
         <caption>Module: {$path}</caption>
         <thead>
           <tr class="rowHdr" frame="box" rules="cols">
-            <th>bp</th>
-            <th class="linenums">#</th>
-            <th>Source</th>
+            <th title="Set or clear a breakpoint.">bp</th>
+            <th class="linenums" title="Line number">#</th>
+            <th title="Source Code">Source</th>
           </tr>
         </thead>
         <tfoot></tfoot>

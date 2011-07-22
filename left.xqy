@@ -103,9 +103,9 @@ xdmp:set-response-content-type("text/html"),
   	   <li id="dbg_stack"><a href="/debug/stack.xqy" target="resultFrame" title="View Stack Frames">Stack</a></li>
   	   <li id="dbg_stepping">Execution
   	     <ul>
-    	   <li id="dbg_step"><a href="/debug/step.xqy?op=step" target="resultFrame" title="Step to beginning or end of current Expression">Step</a></li>
-    	   <li id="dbg_out"><a href="/debug/step.xqy?op=out" target="resultFrame" title="Continue evaluation to the End of the Current Expression">Step Out</a></li>
-    	   <li id="dbg_next"><a href="/debug/step.xqy?op=next" target="resultFrame" title="Continue evaluation until the beginning or end of an expression that is part of the current expression">Next Statement</a></li>
+    	   <li id="dbg_step"><a href="/debug/step.xqy?op=step" target="resultFrame" title="Step to beginning of a subexpression or end of current Expression">Step</a></li>
+    	   <li id="dbg_out"><a href="/debug/step.xqy?op=out" target="resultFrame" title="Step to the End of the Current Expression">Step Out</a></li>
+    	   <li id="dbg_next"><a href="/debug/step.xqy?op=next" target="resultFrame" title="Step to an expression that is NOT a descendant of the current expression.">Step Next</a></li>
     	   <li id="dbg_finish"><a href="/debug/step.xqy?op=finish" target="resultFrame" title="Step until the end of the Current Function">Finish Function</a></li>
     	   <li id="dbg_continue"><a href="/debug/step.xqy?op=continue" target="resultFrame" title="Continue to End of Query">Continue</a></li>
     	   </ul>
@@ -118,7 +118,7 @@ xdmp:set-response-content-type("text/html"),
 </div>
 </body>
   <head>
-    <!-- NOTE: This header IS a work around for and IE bug (http://support.microsoft.com/kb/222064) -->
+    <!-- NOTE: This header is a workaround for an IE bug (http://support.microsoft.com/kb/222064) -->
     <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"/>
   </head>
 </html>
