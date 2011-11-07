@@ -26,7 +26,7 @@ as element()+
 	let $class := $parent/@class/data(.)
 	let $sortcol := if ($parent/@sortcol) then $parent/@sortcol/data(.) else $fcells/cell[1]/@name/data(.)
 	return 
-	<table id={name($parent)} style="width:100%;" border="1" cellspacing="0" cellpadding="1">
+	<table id="{name($parent)}" style="width:100%;" border="1" cellspacing="0" cellpadding="1">
 	  {
 	    if ( fn:exists( $class ) ) then attribute class {$class} else (),
 	    if ( fn:exists( $sortcol ) ) then attribute sortcol {$sortcol} else (),

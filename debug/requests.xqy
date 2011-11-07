@@ -24,12 +24,10 @@ declare function request:current()
 as xs:unsignedLong?
 {
   let $req := xs:unsignedLong(setting:getField( "dbgReqId" ))
-  let $stopped := dbg:stopped()
-  let $attached := dbg:attached()
   return
-    if ( fn:exists( $req ) and ($req = $stopped) )
+    if ( fn:exists( $req ) and ($req = dbg:stopped()) )
     then $req
-    else request:current( $attached[fn:last()] )
+    else request:current( dbg:attached()[fn:last()] )
 };
 
 (:~
@@ -221,7 +219,7 @@ as element(requests)
 {
 	<requests ftype="table" name="dbgReqTbl">
 		<format name="request" title="Request">
-			<cell name="appserver-name" title="App Server"style="text-align:left" />
+			<cell name="appserver-name" title="App Server" style="text-align:left" />
 			<cell name="reqId" title="Request ID"/>
 			<cell name="detach" title="Detach"/>
 			<cell name="hostName" title="Host" />

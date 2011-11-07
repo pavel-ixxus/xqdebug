@@ -27,6 +27,12 @@ as empty-sequence()
     return
       if ( fn:starts-with($name, "__MACOS") or fn:contains( $name, ".svn/" ) or fn:starts-with( $filename, "." ) )
       then ()
+      else if ( fn:ends-with( $filename, ".txt" ) )
+      then 
+        xdmp:document-insert( 
+          fn:concat( $dirname, $name ), 
+          xdmp:zip-get( $file, $name,  <options xmlns="xdmp:zip-get"> <format>text</format> <encoding>auto</encoding> </options> )
+        )
       else xdmp:document-insert( fn:concat( $dirname, $name ), xdmp:zip-get( $file, $name ) )
   )
 };

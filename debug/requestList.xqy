@@ -28,9 +28,9 @@ return (
       <meta http-equiv="pragma" content="no-cache"/> 
       <link rel="stylesheet" type="text/css" href="/assets/styles/xqdebug.css"/>
       <link rel="stylesheet" type="text/css" href="/assets/styles/jquery-ui-1.8.2.css"/>
-    	<script src='/assets/scripts/jquery-1.4.0.js' type='text/javascript' ></script>
-        <script src='/assets/scripts/jquery-ui-1.8.2.min.js' type='text/javascript' ></script>
-        <script src='/assets/scripts/resize.js' type='text/javascript' ></script>
+    	<script src='/assets/scripts/jquery-1.4.0.js' type='text/javascript' > </script>
+        <script src='/assets/scripts/jquery-ui-1.8.2.min.js' type='text/javascript' > </script>
+        <script src='/assets/scripts/resize.js' type='text/javascript' > </script>
       <script type="text/javascript">
         <!--
         function submitenter(myfield,e)
@@ -63,7 +63,11 @@ return (
       </div><br/>
       <div id="current-req">
         { 
-          if ( fn:exists($reqId) and ($reqId = dbg:stopped()) ) 
+          if ( fn:empty($reqId) )
+          (: TODO: Replace this with a timer to refresh the page every ~5 seconds until stopped request is found. :)
+          then <h3 id="currentExpr">No Requests are Stopped for Debugging.</h3>
+          
+          else if ( $reqId = dbg:stopped() ) 
           then
             let $rstat := request:status($reqId)/ss:request
             let $expr := dbg:stack( $reqId )/dbg:expr
