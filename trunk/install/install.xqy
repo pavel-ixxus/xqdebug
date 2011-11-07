@@ -288,6 +288,31 @@ catch ($ex) {
 }
 ;
 
+(: ***** Delete Old Zip file if it exists ***** :)
+xquery version "1.0-ml";
+
+"", fn:concat( "Delete old xqdebug.zip file if it exists in Database... " )
+,
+try {
+  let $zipname := "/code/xqdebug/xqdebug.zip"
+  return
+    if ( fn:exists( xdmp:document-properties( $zipname ) ) )
+    then (
+      xdmp:document-delete( $zipname )
+      ,
+      "Old Zip file deleted."
+      )
+    else "Verified old zip does not exist."
+}
+catch ($ex) {
+  (: We only get here if either document-properties() or document-delete() throws an exception...
+     Which only happens of the file does not exist.
+  :)
+  "Verified old zip does not exist."
+}
+;
+
+
 (: ***** Load Modules into Database ***** :)
 xquery version "1.0-ml";
 import module namespace iv="/xqdebug/shared/common/invoke" at "../shared/common/invoke/invokeFunctions.xqy";
@@ -300,7 +325,7 @@ declare variable $modules-dir := "/code/xqdebug/";
 try {
   let $filename := "/code/xqdebug/xqdebug.zip"
   let $dir := fn:concat( xdmp:install-directory(), "/", xdmp:modules-root(), "xqdebug")
-  let $file := xdmp:filesystem-directory( $dir )/*:entry[fn:ends-with(*:filename, ".zip") or fn:ends-with(*:filename, ".xar")][fn:starts-with(*:filename, "xqdebug")][1]/*:pathname/fn:data(.)
+  let $file := (xdmp:filesystem-directory( $dir )/*:entry[fn:ends-with(*:filename, ".zip") or fn:ends-with(*:filename, ".xar")][fn:starts-with(*:filename, "xqdebug")])[1]/*:pathname/fn:data(.)
   let $assert := 
         if ( fn:empty($file) ) 
         then 

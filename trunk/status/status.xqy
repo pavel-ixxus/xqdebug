@@ -28,7 +28,7 @@ as element()+
 	let $rows	:= $parent/*[name(.) ne "format"]
 	let $last := count($rows)+1
 	return 
-	<table id={name($parent)} class="statustable" cellspacing="0" cellpadding="1" width="100%" border="1">
+	<table id="{name($parent)}" class="statustable" cellspacing="0" cellpadding="1" width="100%" border="1">
 		<tr class="statusrowtitle" sortoncol="none">  {
 			for $cell in $format/cell
 			return (<th>{data($cell/@title)}</th>) 
@@ -36,7 +36,7 @@ as element()+
 		{
 		for $data at $row in $rows[1 to $last]
 		return 
-			<tr class={if($row mod 2 eq 0) then "statusevenrow" else "statusoddrow"}> {
+			<tr class='{if($row mod 2 eq 0) then "statusevenrow" else "statusoddrow"}'> {
 				for $cell at $col in $format/cell
 				let $content := $data/*[name(.) eq data($cell/@name)]
 				return 
