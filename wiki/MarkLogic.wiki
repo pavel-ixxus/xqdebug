@@ -8,8 +8,6 @@ _MarkLogic_ was built from the ground up for performance and scale, it includes 
 
 == Details ==
 
-_MarkLogic_ makes and excellent platform for developing and hosting websites and webservices that serve any data, at any volume, in any structure.
-
 Product information and events can be found at: http://www.marklogic.com/
 
 Developer downloads and info can be found at: http://developer.marklogic.com/
