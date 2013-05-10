@@ -296,7 +296,7 @@ xquery version "1.0-ml";
 try {
   let $zipname := "/code/xqdebug/xqdebug.zip"
   return
-    if ( fn:exists( xdmp:document-properties( $zipname ) ) )
+    if ( fn:exists( fn:doc-available( $zipname ) ) )
     then (
       xdmp:document-delete( $zipname )
       ,
@@ -315,12 +315,10 @@ catch ($ex) {
 
 (: ***** Load Modules into Database ***** :)
 xquery version "1.0-ml";
-import module namespace iv="/xqdebug/shared/common/invoke" at "../shared/common/invoke/invokeFunctions.xqy";
 import module namespace install="xqdebug/install-functions" at "/xqdebug/install/install-functions.xqy";
-import module namespace util = "http://marklogic.com/xdmp/utilities" at "/MarkLogic/utilities.xqy";
 declare variable $dbg-db-name := "XQDebug";
 declare variable $modules-dir := "/code/xqdebug/";
-"", fn:concat( "Load Modules into Database... " )
+"", fn:concat( "Load ZIP or XAR File into Database... " )
 ,
 try {
   let $filename := "/code/xqdebug/xqdebug.zip"
@@ -335,17 +333,27 @@ try {
   let $load := xdmp:document-load($file, $options)
   return (
     fn:concat( "Loaded zip file '", $file, "' into database at '", $filename, "'" )
-    ,
-    install:loadZip( $dbg-db-name, $modules-dir, fn:doc($filename) )
-    ,
-    "Modules Loaded."
   )
 }
 catch ($ex) {
-  (: If any of these directories exist ... then we missed a step. :)
-  if ( $ex/error:code eq "XDMP-DIREXISTS" )
-  then fn:error( $ex/error:code, "Directories should have been deleted in previous step.", $ex ) 
-  else xdmp:rethrow()
+    xdmp:rethrow()
+}
+;
+
+(: ***** Load Modules into Database ***** :)
+xquery version "1.0-ml";
+import module namespace install="xqdebug/install-functions" at "/xqdebug/install/install-functions.xqy";
+declare variable $dbg-db-name := "XQDebug";
+declare variable $modules-dir := "/code/xqdebug/";
+"", fn:concat( "Load Modules from ZIP/XAR file into Database... " )
+,
+try {
+    install:loadZip( $dbg-db-name, $modules-dir, fn:doc( "/code/xqdebug/xqdebug.zip" ) )
+    ,
+    "Modules Loaded."
+}
+catch ($ex) {
+  xdmp:rethrow()
 }
 ;
 
@@ -412,10 +420,18 @@ declare variable $server-name := "_xqdebug-http_9800";
   The appserver should have been created before now, if not something is wrong.
   xdmp:server() will throw an exception if appserver does not exist. 
 :)
-let $sid := xdmp:server( $server-name )
-let $config := admin:appserver-set-debug-allow( admin:get-configuration(), $sid, fn:false() )
-let $config := admin:appserver-set-profile-allow( $config, $sid, fn:false() )
-return admin:save-configuration( $config  )
+let $config := admin:get-configuration()
+let $gids := admin:get-group-ids( $config )
+return
+  if ( admin:appserver-exists( $config, $gids, $server-name ) )
+  then (
+    let $sid := xdmp:server( $server-name )
+    let $config := admin:appserver-set-debug-allow( admin:get-configuration(), $sid, fn:false() )
+    let $config := admin:appserver-set-profile-allow( $config, $sid, fn:false() )
+    return admin:save-configuration( $config  )
+  )
+  else (
+  )
 ,
 fn:concat( "Configured Appserver '", $server-name, "'." )
 ;

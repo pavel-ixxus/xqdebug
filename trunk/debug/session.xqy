@@ -34,7 +34,7 @@ as element(keys)
 
 declare function setting:getSession()
 {
-  if ( xdmp:document-properties( $userSession ) )
+  if ( fn:doc-available( $userSession ) )
   then fn:doc( $userSession )/keys
   else fn:error( xs:QName( "INITFILE-MISSING" ), fn:concat("XQDebug has not been initialized for user '", xdmp:get-current-user(), "'") )
 };
