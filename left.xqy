@@ -10,9 +10,9 @@ import module namespace tables="/xqdebug/html/tables" at "/html/tables.xqy";
 declare option xdmp:mapping "false";
 
 (: Store all request fields to session fields :)
-let $isAdmin := xdmp:has-privilege("http://marklogic.com/xdmp/privileges/debug-any-requests", "execute")
 let $fields  := xdmp:get-request-field-names()
 let $session := for $field in $fields return xdmp:set-session-field($field, xdmp:get-request-field($field))
+let $version := fn:doc( "/code/xqdebug/versions.xml" )/project/version/fn:string(.)
 
 return (
 xdmp:set-response-content-type("text/html"),
@@ -29,13 +29,13 @@ xdmp:set-response-content-type("text/html"),
 <table style="background-color:#E2E2E2; width:100%; border: 1px solid black;" cellspacing="0" cellpadding="0">
   <tr>
     <td class="banner" style="text-align:center;vertical-align:middle;;">
-      <strong>XQDebug</strong>
+      <strong>XQDebug</strong>&nbsp;<small type="hidden">(V{$version})</small>
     </td>
   </tr>
 </table>
 <div style="clear:both">
 {
-  if ($isAdmin) 
+  if ( xdmp:has-privilege("http://marklogic.com/xdmp/privileges/debug-any-requests", "execute") ) 
   then (
   	mhtml:fieldset( "Security", "collapse", 
   		<b>Security</b>,  
@@ -113,7 +113,7 @@ xdmp:set-response-content-type("text/html"),
   	 </ul>
   	)
 	)
-	else ()
+	else <strong>Current user Does not have debugging privileges</strong>
 }
 </div>
 </body>

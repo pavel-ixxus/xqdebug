@@ -16,7 +16,7 @@ declare function perm:getUriElement($uri)
 {
 	let $child := perm:removeEmptyStrings(fn:tokenize($uri,"/"))[fn:last()]
 	let $parent := fn:substring($uri,0,1 + (fn:string-length($uri) - fn:string-length($child)))
-  let $props := xdmp:document-properties($uri)
+    let $props := xdmp:document-properties($uri)
 	return element child { 
 	  			attribute all { $uri }, 
 	  			attribute parent { $parent }, 

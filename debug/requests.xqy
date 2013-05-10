@@ -108,7 +108,7 @@ declare function request:listSource( $reqId as xs:unsignedLong, $db as xs:unsign
   else (
     let $uri := if ($uri eq "/") then "/default.xqy" else $uri
     let $rootDir := request:trimRoot( $db, $root )
-    let $path := fn:concat( $rootDir, $uri )
+    let $path := fn:concat( $rootDir, if ( fn:not(fn:starts-with($uri,'/')) ) then '/' else (), $uri )
     let $content := 
           if ( fn:empty( $uri ) or fn:empty( $current ) ) 
           then () 
@@ -239,6 +239,7 @@ as element(requests)
 		for $req in fn:distinct-values($reqs)
     let 
       $request := 
+        (: Search all hosts and servers in the cluster for the given request id... there should only be one request found. :)
         for $hid in $hids, $sid in $sids
         return xdmp:server-status( $hid, $sid )/ss:request-statuses/ss:request-status[ss:request-id = $req],
       $id := $request/ss:request-id/fn:data(.),
