@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <name>XQDebug</name>
+    <version>1.0.7</version>
+    <build>
+        <timestamp>Fri May 10 09:31:29 MDT 2013</timestamp>
+        <revision>1</revision>
+    </build>
+    <dependencies>
+    </dependencies>
+</project>
